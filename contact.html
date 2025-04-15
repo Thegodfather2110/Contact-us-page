@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Vedahaven</title>
+</head>
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      background-color: #F4F6F8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .containers {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background-color: #f8f8f8;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .container1, 
+    .container2 ,
+    .container3 ,
+    .container4 {
+      background-color: #f8f8f8;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .container4:hover ,
+    .container2:hover,
+    .container1:hover ,
+    .container3:hover {
+      transform: translateY(-4px);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+  
+    .social-media .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-links .icon img {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-links .icon:hover img {
+      transform: scale(1.1);
+    }
+  
+    .h2 {
+      color: #000000;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: left; 
+    }
+    
+    .issue-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .cards {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cards:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .cards-btn {
+      background-color: #0c0c0c;
+      padding: 10px 20px;
+      color: #ffffff;
+      font-size: 1rem;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cards-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .cards img {
+      height: 100px;
+      width: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .cards-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .cards-description {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    
+    .contact-form-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .issuecardspopupcontent {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      text-align:left;
+      position: relative; display: flex;
+      flex-direction: column;
+    }
+    .coverpagepopupcontent {
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      text-align: center;
+      position: relative;
+    }
+
+    .submitcoverpagebtn,
+    .submitComplainbtn,
+    .submitreportbtn ,
+    .submitpaymentbtn,
+    .contactformsubmitbtn {
+      background-color: #0c0c0c;
+      padding: 10px 20px;
+      color: #ffffff;
+      font-size: 1rem;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 25px;
+    }
+
+    .ReportUserPopupOverlay,
+    .ContentIssuePopupOverlay,
+    .paymentIssuePopupOverlay,
+    .coverpageIssuePopupOverlay,
+    .ThankyouPopupOverlay {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      justify-content: center;
+      align-items: center;
+      z-index: 1000; /* Place above other content */
+    }
+    .popupXclosebtn {
+      background-color: transparent;
+      border: none;
+      color: black;
+      font-size: 20px;
+      cursor: pointer;
+      top: 10px;
+      right: 10px;
+      margin-right: 40px;
+    }
+    .popupXclosebtn:hover {
+      color: #555;
+    }
+    .thankyou-popup-content {
+      background-color: white;
+      color: black;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+    }
+    .thankyou-popup-overlay {
+        padding:20px;
+    }
+
+    .issuecardspopupcontent input, .issuecardspopupcontent textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #333;
+    }
+    .contactformsubmitbtn:hover{
+      transform: translateY(-3px);
+      box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3); 
+    }
+
+    .coverpagepopupcontent label,
+    .container4 label {
+      font-weight: bold;
+      color: #333;
+    }
+    .coverpagepopupcontent input, .coverpagepopupcontent textarea,
+    .container4 input, .container4 textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    
+    .container4 input[type="file"] {
+      padding: 5px;
+    }
+
+    
+    @media (max-width: 768px) {
+      .containers {
+        padding: 10px;
+      }
+
+      .container3 {
+        width: 100%;
+      }
+
+
+      .issue-cards {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Tablet and Desktop Layout */
+    @media (min-width: 769px) {
+      .issue-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+    }
+
+  </style>
+  </head>
+<body>
+  <div class="popup-overlay">
+     
+    <div class="ReportUserPopupOverlay" id="ReportUserPopupOverlay">
+      <div class="issuecardspopupcontent">
+        <button class="popupXclosebtn" id ="ReportUsercloseBtn"onclick="closeReportUserPopupOverlay()">X</button>
+        <h3>Report User</h3>
+        <label for="reportedUserName">Name of the User:</label>
+        <input type="text" id="reportedUserName" name="reportedUserName" placeholder="Enter user name" required>
+        <label for="reportReason">Reason for Reporting:</label>
+        <textarea id="reportReason" name="reportReason" placeholder="Enter the reason" required></textarea>
+        <p id="reportWarningMessage" style="color: red; font-weight: bold;"></p>
+        <button class="submitreportbtn" id="submitreportbtn">Submit</button>
+     </div>
+   </div>
+
+    <div class="ContentIssuePopupOverlay" id="ContentIssuePopupOverlay">
+      <div class="issuecardspopupcontent">
+        <button class="popupXclosebtn" id="ContentIssueclosebtn" onclick="closeContentIssuePopupOverlay()">X</button>
+        <h3>Content Issue</h3>
+        <label for="contentIssueName">Name of Book/eBook:</label>
+        <input type="text" id="contentIssueName" name="contentIssueName" placeholder="Enter Book/Ebook Name" required>
+        <label for="complainingreason">Reason for Complaining</label>
+        <textarea id="complainingReason" name="complainingReason" placeholder="Enter the reason" required></textarea>
+        <p id="complainWarningMessage" style="color: red; font-weight: bold;"></p>
+        <button class="submitComplainbtn" id="submitComplainbtn">Submit</button>
+      </div>
+    </div>
+
+    <div class="paymentIssuePopupOverlay" id="paymentIssuePopupOverlay">
+      <div class="issuecardspopupcontent">
+        <button class="popupXclosebtn" id="paymentIssueclosebtn" onclick="closepaymentIssuePopupOverlay()">X</button>
+        <h3>Payment Issue</h3>
+        <label for="paymentissueName">Subject</label>
+        <input type="text" id="paymentIssuesubject" name="paymentIssueName" placeholder="State your Payment issue" required>
+        <label for="paymentissueReason"> State Payment Issue</label>
+        <textarea id="paymentissueReason" name="paymentissueReason" placeholder="Breif Description" required></textarea>
+        <p id="paymentWarningMessage" style="color: red; font-weight: bold;"></p>
+        <button class="submitpaymentbtn" id="submitPaymentBtn">Submit</button>
+      </div>
+    </div>
+
+    <div class="coverpageIssuePopupOverlay" id="coverpageIssuePopupOverlay">
+      <div class="coverpagepopupcontent" >
+        <button class="popupXclosebtn" id="coverpageclosebtn" onclick="closecoverpageIssuepopupOverlay()">X</button>
+        <h3>Coverpage Issue</h3>
+        <label for="coverpagename">Content Name</label>
+        <input type="text" id="coverpagename" name="coverpageissuename" placehorder="Book/eBook Name" required>
+        <label for="file">Upload Coverpage 1:</label>
+        <input type="file" id="coverpage1" name="coverpage1">
+        <label for="file">Upload Coverpage 2:</label>
+        <input type="file" id="coverpage2" name="coverpage2">
+        <p id="coverpageWarningMessage" style="color:red; font-weight:bold;"></p>
+        <button class="submitcoverpagebtn" id="submitcoverpagebtn">Submit</button>
+      </div>
+    </div>
+ </div>
+
+  <div class="ThankyouPopupOverlay" id="ThankyouPopupOverlay">
+    <div class="thankyou-popup-content">
+      <button class="popupXclosebtn" id ="ThankyouPopupClosebtn"  onclick="closeThankyouPopupOverlay()">X</button>
+      <h3>Thank you for Contacting us!</h3>
+      <p>We will look into your problem and get back to you within 24 hours.</p>
+    </div>
+  </div>
+
+  <section class="containers">
+    <!-- Container 1: When to Use -->
+    <div class="container1">
+      <h2>When to Use</h2>
+      <strong><p>If you encounter any of the following issues:</p>
+       <ul>
+         <li>Inappropriate or offensive content</li>
+         <li>Payment issues or delays</li>
+         <li>Technical difficulties or account problems</li>
+         <li>General questions or feedback</li>
+       </ul>
+       <p>We offer 24/7 support to resolve your queries quickly and effectively.</p>
+      </strong>
+    </div>
+
+    <!-- Container 2: Social Media Links -->
+    <div class="container2">
+      <h2>Connect with Us</h2>
+      <div class="social-links">
+        <a href="#" class="icon" title="Email">
+          <img src="resources/gmail.png" alt="Gmail" />
+        </a>
+        <a href="#" class="icon" title="Instagram">
+          <img src="resources/instagram.png" alt="Instagram" />
+        </a>
+        <a href="#" class="icon" title="LinkedIn">
+          <img src="resources/linkedin.png" alt="LinkedIn" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Container 3: Direct Problem Report Buttons -->
+    <div class="container3">
+      <h2>Report An Issue</h2>
+
+      <div class="issue-cards">
+       <div class="cards">
+         <img src="resources/report (1).png" alt="Cardss Image 1" class="cards-img">
+         <h3 class="cards-title">REPORT USER</h3>
+         <p class="cards-description">Report user issues or exploits.</p>
+         <button class="cards-btn" id="reportUserbtn">REPORT</button>
+       </div>
+      
+       <div class="cards">
+         <img src="resources/adult-content.png" alt="Cards Image 2" class="cards-img">
+         <h3 class="cards-title">CONTENT ISSUE</h3>
+         <p class="cards-description">Report inappropriate content.</p>
+         <button class="cards-btn" id="Complainbtn">COMPLAIN</button>
+       </div>
+
+       <div class="cards">
+         <img src="resources/transaction-failed.png" alt="Cards Image 3" class="cards-img">
+         <h3 class="cards-title">PAYMENT ISSUE</h3>
+         <p class="cards-description">Report payment related issues.</p>
+         <button class="cards-btn"  id="paymentIssueBtn">QUERRY</button>
+       </div>
+      
+       <div class="cards">
+         <img src="resources/error-page.png" alt="Cards Image 4" class="cards-img">
+         <h3 class="cards-title">COVERPAGE ISSUE</h3>
+         <p class="cards-description">Report cover page link issues.</p>
+         <button class="cards-btn" id="coverPageBtn">COVERPAGE</button>
+       </div>
+      </div>
+    </div>
+
+      
+    <div class="container4">
+     <h2>Contact Form</h2>
+     <div class="contact-form-content">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="phone">Phone No.:</label>
+      <input type="tel" id="phone" name="phone" required>
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="4" required></textarea> 
+      <label for="file">Upload File/Screenshot:</label>
+      <input type="file" id="file" name="file">
+      <p id="WarningMessage" style="color: red; font-weight: bold;"></p>
+      <button type="submit" class="contactformsubmitbtn" id="contactformsubmitbtn">Submit</button>
+     </div> 
+  </div>
+  </section>
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Popup variables
+  const reportUserBtn = document.getElementById('reportUserbtn');
+  const reportUserPopup = document.getElementById('ReportUserPopupOverlay');
+  const submitReportBtn = document.getElementById('submitreportbtn');
+  const reportCloseBtn = document.getElementById('ReportUsercloseBtn');
+  const reportedUserName = document.getElementById('reportedUserName');
+  const reportReason = document.getElementById('reportReason');
+  const reportWarningMessage = document.getElementById('reportWarningMessage');
+
+  const complainBtn = document.getElementById('Complainbtn');
+  const contentIssuePopup = document.getElementById('ContentIssuePopupOverlay');
+  const submitComplainBtn = document.getElementById('submitComplainbtn');
+  const complainCloseBtn = document.getElementById('ContentIssueclosebtn');
+  const contentIssueName = document.getElementById('contentIssueName');
+  const complainingReason = document.getElementById('complainingReason');
+  const complainWarningMessage = document.getElementById('complainWarningMessage');
+
+  const paymentIssueBtn = document.getElementById('paymentIssueBtn');
+  const paymentIssuePopup = document.getElementById('paymentIssuePopupOverlay');
+  const submitPaymentBtn = document.getElementById('submitPaymentBtn');
+  const paymentIssueCloseBtn = document.getElementById('paymentIssueclosebtn');
+  const paymentIssuesubject = document.getElementById('paymentIssuesubject');
+  const paymentissueReason = document.getElementById('paymentissueReason');
+  const paymentWarningMessage = document.getElementById('paymentWarningMessage');
+
+  const coverpagebtn = document.getElementById('coverPageBtn');
+  const coverpageIssuePopup = document.getElementById('coverpageIssuePopupOverlay');
+  const submitcoverpageBtn = document.getElementById('submitcoverpagebtn');
+  const coverpageclosebtn = document.getElementById('coverpageclosebtn');
+  const coverpagename = document.getElementById('coverpagename');
+  const coverpage1 = document.getElementById('coverpage1');
+  const coverpage2 = document.getElementById('coverpage2');
+  const coverpageWarningMessage = document.getElementById('coverpageWarningMessage');
+
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const phoneInput = document.getElementById('phone');
+  const messageInput = document.getElementById('message');
+  const fileInput = document.getElementById('file');
+  const submitButton = document.getElementById('contactformsubmitbtn');
+  const warningMessage = document.getElementById('WarningMessage');
+
+  const thankYouPopup = document.getElementById('ThankyouPopupOverlay');
+  const thankYouCloseBtn = document.getElementById('ThankyouPopupClosebtn');
+
+  function closePopup(popup) {
+    popup.style.display = 'none';
+  }
+
+  function showThankYou() {
+    thankYouPopup.style.display = 'flex';
+    setTimeout(() => closePopup(thankYouPopup), 3000);
+  }
+
+  reportUserBtn.addEventListener('click', () => {
+    reportedUserName.value = '';
+    reportReason.value = '';
+    reportWarningMessage.textContent = '';
+    reportUserPopup.style.display = 'flex';
+  });
+
+  reportCloseBtn.addEventListener('click', () => closePopup(reportUserPopup));
+
+  submitReportBtn.addEventListener('click', () => {
+    if (!reportedUserName.value.trim() || !reportReason.value.trim()) {
+      reportWarningMessage.textContent = 'Please fill in all required fields.';
+    } else {
+      closePopup(reportUserPopup);
+      showThankYou();
+    }
+  });
+
+  complainBtn.addEventListener('click', () => {
+    contentIssueName.value = '';
+    complainingReason.value = '';
+    complainWarningMessage.textContent = '';
+    contentIssuePopup.style.display = 'flex';
+  });
+
+  complainCloseBtn.addEventListener('click', () => closePopup(contentIssuePopup));
+
+  submitComplainBtn.addEventListener('click', () => {
+    if (!contentIssueName.value.trim() || !complainingReason.value.trim()) {
+      complainWarningMessage.textContent = 'Please fill in all required fields.';
+    } else {
+      closePopup(contentIssuePopup);
+      showThankYou();
+    }
+  });
+
+  paymentIssueBtn.addEventListener('click', () => {
+    paymentIssuesubject.value = '';
+    paymentissueReason.value = '';
+    paymentWarningMessage.textContent = '';
+    paymentIssuePopup.style.display = 'flex';
+  });
+
+  paymentIssueCloseBtn.addEventListener('click', () => closePopup(paymentIssuePopup));
+
+  submitPaymentBtn.addEventListener('click', () => {
+    if (!paymentIssuesubject.value.trim() || !paymentissueReason.value.trim()) {
+      paymentWarningMessage.textContent = 'Please fill in all required fields.';
+    } else {
+      closePopup(paymentIssuePopup);
+      showThankYou();
+    }
+  });
+
+  coverpagebtn.addEventListener('click', () => {
+    coverpagename.value = '';
+    coverpage1.value = '';
+    coverpage2.value = '';
+    coverpageWarningMessage.textContent = '';
+    coverpageIssuePopup.style.display = 'flex';
+  });
+
+  coverpageclosebtn.addEventListener('click', () => closePopup(coverpageIssuePopup));
+
+
+  submitcoverpageBtn.addEventListener('click', () => {
+    if (!coverpagename.value.trim()) {
+      coverpageWarningMessage.textContent = 'Please fill in the content name.';
+    } else if (!coverpage1.files.length && !coverpage2.files.length) {
+      coverpageWarningMessage.textContent = 'Please upload at least one cover page file.';
+    } else {
+      closePopup(coverpageIssuePopup);
+      showThankYou();
+    }
+  });
+
+
+    thankYouCloseBtn.addEventListener('click', function () {
+      thankYouPopup.style.display = 'none';
+  });
+
+
+  submitButton.addEventListener('click', (event) => {
+    event.preventDefault(); 
+
+   
+    if (
+      !nameInput.value.trim() ||
+      !emailInput.value.trim() ||
+      !phoneInput.value.trim() ||
+      !messageInput.value.trim()
+    ) {
+      warningMessage.textContent = 'Please fill out all required fields.';
+    } else {
+      warningMessage.textContent = '';
+
+     
+      showThankYou();
+
+    
+      nameInput.value = '';
+      emailInput.value = '';
+      phoneInput.value = '';
+      messageInput.value = '';
+      fileInput.value = ''; 
+    }
+  });
+
+  
+
+ // Close Thank You Popup on X button click
+  thankYouCloseBtn.addEventListener('click', () => closePopup(thankYouPopup));
+});
+  
+</script>
+</body>    
+  
